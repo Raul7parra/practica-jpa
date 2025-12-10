@@ -13,6 +13,10 @@ public interface DirectorRepository extends JpaRepository<DirectorEntity, Long> 
     // Ejemplo de método de consulta por nombre
     Optional<DirectorEntity> findByNombre(String nombre);
 
+    //Comprueba si existe un director con ese nombre
+    boolean existsByNombre(String nombre);
+
+    //Ordena una lista de directores alfabéticamente
     List<DirectorEntity> findByNombreContainingIgnoreCase(String nombre);
 
     // 2) Mismo efecto pero usando @Query con parámetro nombrado
