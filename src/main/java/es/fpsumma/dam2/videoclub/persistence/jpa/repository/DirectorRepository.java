@@ -1,6 +1,7 @@
 package es.fpsumma.dam2.videoclub.persistence.jpa.repository;
 
 import es.fpsumma.dam2.videoclub.persistence.jpa.entity.DirectorEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,10 +18,9 @@ public interface DirectorRepository extends JpaRepository<DirectorEntity, Long> 
     boolean existsByNombre(String nombre);
 
     //Ordena una lista de directores alfabéticamente
-    List<DirectorEntity> findByNombreContainingIgnoreCase(String nombre);
+    List<DirectorEntity> findAll(Sort sort);
 
     // 2) Mismo efecto pero usando @Query con parámetro nombrado
     @Query("SELECT d FROM DirectorEntity d WHERE d.nombre = :nombre")
     Optional<DirectorEntity> buscarPorNombre(@Param("nombre") String nombre);
-
 }
