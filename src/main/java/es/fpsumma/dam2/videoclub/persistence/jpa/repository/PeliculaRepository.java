@@ -1,6 +1,7 @@
 package es.fpsumma.dam2.videoclub.persistence.jpa.repository;
 
 import es.fpsumma.dam2.videoclub.persistence.jpa.entity.PeliculaEntity;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,9 +26,8 @@ public interface PeliculaRepository extends JpaRepository <PeliculaEntity,Long> 
     List<PeliculaEntity> buscarPeliculaPorActor (@Param("nombreActor") String nombreActor);
 
     //Paginación: obtener las películas de un género concreto de forma paginada
-    List<PeliculaEntity> findByGenero(String genero, Pageable pageable);
+    Page<PeliculaEntity> findByGenero(String genero, Pageable pageable);
 
     //Ordenación: obtener las películas ordenadas por año de estreno o por puntuación
     List<PeliculaEntity> findAll(Sort sort);
-
 }
