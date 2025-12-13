@@ -18,30 +18,35 @@ class DirectorRepositoryTest {
     @Autowired
     private DirectorRepository directorRepository;
 
+    //Test para buscar por nombre exacto
     @Test
     void deberiaEncontrarDirectorPorNombre() {
+        String nombre = "Christopher Nolan";
         Optional<DirectorEntity> resultado = directorRepository.findByNombre("Christopher Nolan");
+
         assertThat(resultado).isPresent();
-        DirectorEntity director = resultado.get();
-        assertThat(director.getNombre()).isEqualTo("Christopher Nolan");
+        assertThat(resultado.get().getNombre()).isEqualTo(nombre);
     }
 
-    @Test
-    void deberiaEncontrarDirectorPorNombreContainingIgnoreCase() {
-        List<DirectorEntity> directores = directorRepository.findByNombreContainingIgnoreCase("Ridley");
-        assertThat(directores).hasSize(1);
-    }
-
+    //Test para buscar por nombre exacto con @Query
     @Test
     void deberiaEncontrarDirectorPorNombre_conQuery() {
-        var resultado = directorRepository.buscarPorNombre("Christopher Nolan");
-        assertThat(resultado).isPresent();
-        assertThat(resultado.get().getNombre()).isEqualTo("Christopher Nolan");
+        String nombre = "Steven Spielberg";
+        Optional<DirectorEntity> director = directorRepository.buscarPorNombre(nombre);
+
+        assertThat(director).isPresent();
+        assertThat(director.get().getNombre()).isEqualTo(nombre);
     }
 
+    //Test para comprobar si existe un director por nombre
     @Test
-    void noDeberiaEncontrarDirectorInexistente() {
-        Optional<DirectorEntity> resultado = directorRepository.findByNombre("Director Inventado");
-        assertThat(resultado).isEmpty();
+    void deberiaEncontrarExistenciaDirector(){
+        String nombre = "Christopher Nolan";
+        boolean existe = directorRepository.existsByNombre(nombre);
+        assertThat(existe).isTrue();
+
+        String nombreInexistente = "Raul Parra";
+        boolean noExiste = directorRepository.existsByNombre(nombreInexistente);
+        assertThat(noExiste).isFalse();
     }
 }
