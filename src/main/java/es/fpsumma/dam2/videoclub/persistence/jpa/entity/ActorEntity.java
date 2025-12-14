@@ -15,14 +15,14 @@ public class ActorEntity {
     private String nombre;
 
     @ManyToMany(mappedBy = "actores")
-    private Set<PeliculaEntity> pelicula;
+    private Set<PeliculaEntity> peliculas;
 
     public ActorEntity() {}
 
-    public ActorEntity(Long id, String nombre,  Set<PeliculaEntity> pelicula) {
+    public ActorEntity(Long id, String nombre,  Set<PeliculaEntity> peliculas) {
         this.id = id;
         this.nombre = nombre;
-        this.pelicula = pelicula;
+        this.peliculas = peliculas;
     }
 
     public Long getId() {
@@ -41,11 +41,11 @@ public class ActorEntity {
         this.nombre = nombre;
     }
 
-    public Set<PeliculaEntity> getPelicula() {
-        return pelicula;
+    public Set<PeliculaEntity> getPeliculas() {
+        return peliculas;
     }
 
-    public void setPelicula(Set<PeliculaEntity> pelicula) {
-        this.pelicula = pelicula;
+    public void setPeliculas(Set<PeliculaEntity> pelicula) {
+        this.peliculas = pelicula;
     }
 }

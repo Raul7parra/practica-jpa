@@ -12,7 +12,7 @@ public interface ActorRepository extends JpaRepository <ActorEntity, Long> {
     Optional<ActorEntity> findByNombre (String nombre);
 
     //Obtener todos los actores que han participado en una película cuyo título se pasa como parámetro
-    List<ActorEntity> findByPeliculaTitulo (String titulo);
+    List<ActorEntity> findByPeliculasTitulo (String titulo);
 
     //Ordenación: obtener actores ordenados alfabéticamente por nombre
     List<ActorEntity> findAll(Sort sort);
